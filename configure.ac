@@ -315,12 +315,6 @@ ReZap/Makefile
 ReZap/src/Makefile
 ReZap/meta/Makefile
 
-RCUSelect/Makefile
-RCUSelect/src/Makefile
-RCUSelect/conf/Makefile
-RCUSelect/po/Makefile
-RCUSelect/meta/Makefile
-
 SatipClient/Makefile
 SatipClient/src/Makefile
 SatipClient/po/Makefile
