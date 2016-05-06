@@ -31,7 +31,7 @@ class TransponderSearchSupport:
 				frontend = raw_channel.getFrontend()
 				if frontend:
 					if do_close:
-						frontend.closeFrontend() # immediate close... 
+						frontend.closeFrontend() # immediate close...
 					if ret_boolean:
 						del raw_channel
 						del frontend
@@ -61,7 +61,7 @@ class SatBlindscanState(Screen):
 		<widget source="constellation" render="Canvas" position="554,254" size="256,256" correct_aspect="width" />
 	</screen>
 	"""
-	
+
 	def __init__(self, session, fe_num, text):
 		Screen.__init__(self, session)
 		self["list"]=List()
@@ -442,10 +442,9 @@ class SatelliteTransponderSearchSupport:
 		else:
 			tmpstr = _("Blindscan is not supported by this tuner (%s)") %tunername
 		self.satellite_search_session = self.session.openWithCallback(self.satelliteTransponderSearchSessionClosed, SatBlindscanState, tuner_no, tmpstr)
-		if self.auto_scan:
-			self.timer = eTimer()
-			self.timer.callback.append(self.updateStateSat)
-			self.updateStateSat()
+		self.timer = eTimer()
+		self.timer.callback.append(self.updateStateSat)
+		self.updateStateSat()
 
 
 class Blindscan(ConfigListScreen, Screen, TransponderSearchSupport, SatelliteTransponderSearchSupport):
@@ -468,7 +467,7 @@ class Blindscan(ConfigListScreen, Screen, TransponderSearchSupport, SatelliteTra
 		if self.service is not None:
 			self.feinfo = self.service.frontendInfo()
 			frontendData = self.feinfo and self.feinfo.getAll(True)
-		
+
 		self.createConfig(frontendData)
 
 		del self.feinfo
@@ -511,10 +510,10 @@ class Blindscan(ConfigListScreen, Screen, TransponderSearchSupport, SatelliteTra
 
 		self.tunerEntry = getConfigListEntry(_("Tuner"), self.scan_nims)
 		self.list.append(self.tunerEntry)
-		
+
 		if self.scan_nims == [ ]:
 			return
-		
+
 		self.systemEntry = None
 		self.modulationEntry = None
 		self.satelliteEntry = None
@@ -621,7 +620,7 @@ class Blindscan(ConfigListScreen, Screen, TransponderSearchSupport, SatelliteTra
 
 			self.scan_nims = ConfigSelection(choices = nim_list)
 
-			self.scan_sat.bs_system = ConfigSelection(default = eDVBFrontendParametersSatellite.System_DVB_S2, 
+			self.scan_sat.bs_system = ConfigSelection(default = eDVBFrontendParametersSatellite.System_DVB_S2,
 				choices = [ (eDVBFrontendParametersSatellite.System_DVB_S2, _("DVB-S + DVB-S2")),
 					(eDVBFrontendParametersSatellite.System_DVB_S, _("DVB-S only"))])
 
@@ -693,7 +692,7 @@ class Blindscan(ConfigListScreen, Screen, TransponderSearchSupport, SatelliteTra
 		startScan = True
 		removeAll = True
 		index_to_scan = int(self.scan_nims.value)
-		
+
 		if self.scan_nims == [ ]:
 			self.session.open(MessageBox, _("No tuner is enabled!\nPlease setup your tuner settings before you start a service scan."), MessageBox.TYPE_ERROR)
 			return
