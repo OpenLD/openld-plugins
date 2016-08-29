@@ -180,6 +180,12 @@ def startMenu(menuid):
 	if getImageDistro() in ('openatv'):
 		if menuid != "extended":
 			return []
+	elif getImageDistro() in ('openld'):
+		if menuid != "extended":
+			return [ ]
+	elif getImageDistro() in ('openhdf'):
+		if menuid != "devices_menu":
+			return [ ]
 	else:
 		if menuid != "system":
 			return []
