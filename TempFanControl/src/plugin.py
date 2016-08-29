@@ -182,10 +182,10 @@ def startMenu(menuid):
 			return []
 	elif getImageDistro() in ('openld'):
 		if menuid != "extended":
-			return [ ]
+			return []
 	elif getImageDistro() in ('openhdf'):
 		if menuid != "devices_menu":
-			return [ ]
+			return []
 	else:
 		if menuid != "system":
 			return []
