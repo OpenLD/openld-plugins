@@ -1,4 +1,4 @@
-oe-alliance-plugins
+openld-plugins
 ===================
 
-required oe-alliance plugins 
+required openld plugins 
