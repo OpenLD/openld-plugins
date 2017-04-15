@@ -1,6 +1,6 @@
 ACLOCAL_AMFLAGS = -I m4
 
-SUBDIRS = Blindscan DLNABrowser DLNAServer StreamTV 3GModemManager TunerServer OnDemand Fempa LCD4linux RemoteChannelStreamConverter BTDevicesManager SatipClient TerrestrialScan
+SUBDIRS = Blindscan DLNABrowser DLNAServer StreamTV 3GModemManager TunerServer OnDemand Fempa LCD4linux RemoteChannelStreamConverter BTDevicesManager SatipClient TerrestrialScan ChannelsImporter DsayersCustomMixImporter
 
 if MIPSEL
 SUBDIRS += WirelessAccessPoint
@@ -18,6 +18,10 @@ if DAGS7356
 SUBDIRS += TransCodingSetup
 endif
 
+if DAGS7252
+SUBDIRS += TransCodingSetup
+endif
+
 if DREAMBOX
 SUBDIRS +=  DMBlindscan
 endif
@@ -31,6 +35,18 @@ SUBDIRS += MultiTransCodingSetup
 endif
 
 if G100
+SUBDIRS += F3LEDControl
+endif
+
+if G101
+SUBDIRS += F3LEDControl
+endif
+
+if HD51
+SUBDIRS += F3LEDControl
+endif
+
+if ET1x000
 SUBDIRS += F3LEDControl
 endif
 
@@ -110,11 +126,23 @@ if INIHDP
 SUBDIRS += MultiTransCodingSetup
 endif
 
+if FORMULER1
+SUBDIRS += MultiTransCodingSetup
+endif
+
 if FORMULER3
 SUBDIRS += F3LEDControl
 endif
 
 if FORMULER4
+SUBDIRS += F3LEDControl
+endif
+
+if FORMULER4TURBO
+SUBDIRS += F3LEDControl
+endif
+
+if TIVIARMIN
 SUBDIRS += F3LEDControl
 endif
 
@@ -158,6 +186,10 @@ if H5
 SUBDIRS += F3LEDControl
 endif
 
+if H7
+SUBDIRS += F3LEDControl
+endif
+
 if LC
 SUBDIRS += F3LEDControl
 endif
@@ -194,6 +226,14 @@ if VUSOLO4K
 SUBDIRS += FirmwareUpgrade VuRemote TransCodingSetup
 endif
 
+if VUUNO4K
+SUBDIRS += FirmwareUpgrade VuRemote TransCodingSetup
+endif
+
+if VUULTIMO4K
+SUBDIRS += FirmwareUpgrade VuRemote TransCodingSetup
+endif
+
 if GIGABLUE
 SUBDIRS += GigaBlueVFDControl AudioEffect
 endif
@@ -223,12 +263,20 @@ if GB7356
 SUBDIRS += TransCodingSetup
 endif
 
+if VS1000
+SUBDIRS += F3LEDControl XtrendRemote
+endif
+
 if VUPLUS
 SUBDIRS += HbbTV AudioEffect
 endif
 
 if WETEK
-SUBDIRS += ReZap
+SUBDIRS += RCUSelect ReZap
+endif
+
+if HARDKERNEL
+SUBDIRS += RCUSelect ReZap
 endif
 
 if XC7362

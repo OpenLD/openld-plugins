@@ -1,84 +1,99 @@
-# Greek translation for OpenPli.
-# dimfil.sat@gmail.com, 2012.
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: enigma2_v2.0\n"
+"Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-12-03 15:01+0000\n"
-"PO-Revision-Date: 2012-05-18 01:41+0100\n"
-"Last-Translator: Andy Blackburn <andyblac@o2.co.uk>\n"
+"POT-Creation-Date: 2017-01-11 20:42+0200\n"
+"PO-Revision-Date: 2017-01-11 20:44+0200\n"
 "Language-Team: \n"
-"Language: el\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Pootle 2.0.3\n"
-"X-Poedit-Language: Greek\n"
+"X-Generator: Poedit 1.8.8\n"
+"Last-Translator: MCelliot_g <mcelliot_g@hotmail.com>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: el_GR\n"
 
-msgid "Blink Record Led"
-msgstr ""
+#: plugin.py:25
+msgid "Channelnumber in Standby off"
+msgstr "Απενεργοποίηση αριθμού στην αναμονή"
 
-msgid "Blue"
-msgstr ""
+#: plugin.py:25
+msgid "Channelnumber in Standby Clock"
+msgstr "Αριθμός καναλιού στην Αναμονή Ρολόι "
 
-#
-#
-msgid "Cancel"
-msgstr "Άκυρο "
+#: plugin.py:25
+msgid "Channelnumber/Clock in Standby Clock"
+msgstr "Αριθμός καναλιού/Ρολόι στην Αναμονή Ρολόι"
 
-msgid "Enable led"
-msgstr ""
+#: plugin.py:25
+msgid "Clock always"
+msgstr "Πάντα Ρολόι"
 
-msgid "Led state Deep Standby"
-msgstr ""
+#: plugin.py:25
+msgid "Always off"
+msgstr "Πάντα εκτός"
 
-msgid "Led state RUN"
-msgstr ""
+#: plugin.py:27
+msgid "yes"
+msgstr "ναι"
 
-msgid "Led state Record"
-msgstr ""
+#: plugin.py:27
+msgid "no"
+msgstr "όχι"
 
-msgid "Led state Standby"
-msgstr ""
-
-msgid "No"
-msgstr ""
-
-msgid "None"
-msgstr ""
-
+#: plugin.py:28
 msgid "Off"
-msgstr ""
+msgstr "Κλειστό"
 
-msgid "Purple"
-msgstr ""
+#: plugin.py:28
+msgid "On/Off"
+msgstr "Ανοικτό/Κλειστό"
 
-msgid "Red"
-msgstr ""
+#: plugin.py:28
+msgid "Brightness level"
+msgstr "Επίπεδο φωτεινότητας"
 
-#
-#
+#: plugin.py:225 plugin.py:324 plugin.py:331
+msgid "LED Display Setup"
+msgstr "Ρυθμίσεις Οθόνης LED"
+
+#: plugin.py:236
+msgid "Cancel"
+msgstr "Ακύρωση"
+
+#: plugin.py:237
 msgid "Save"
 msgstr "Αποθήκευση"
 
-msgid "Show clock"
-msgstr ""
-
-msgid "Show clock in Deep Standby"
-msgstr ""
-
-msgid "Time mode"
-msgstr ""
-
+#: plugin.py:238
 msgid "Update Date/Time"
-msgstr ""
+msgstr "Ενημέρωση Ημερομηνίας/Ώρας"
 
-msgid "VFD_Giga"
-msgstr ""
+#: plugin.py:251 plugin.py:271
+msgid "Show on LED"
+msgstr "Εμφάνιση στη LED"
 
-msgid "Yes"
-msgstr ""
+#: plugin.py:253
+msgid "Time mode"
+msgstr "Λειτουργία ώρας"
 
-msgid "in standby: "
-msgstr ""
+#: plugin.py:254 plugin.py:273
+msgid "Show REC-Symbol in Display"
+msgstr "Εμφάνιση συμβόλου REC στην Οθόνη"
+
+#: plugin.py:256 plugin.py:275
+msgid "Show blinking Clock on Display during recording"
+msgstr "Εμφάνιση αναβοσβηνόμενου Ρολογιού στην Οθόνη κατά την εγγραφή"
+
+#: plugin.py:258
+msgid "Brightness Level 1"
+msgstr "Επίπεδο φωτεινότητας 1"
+
+#: plugin.py:259
+msgid "Brightness Level 2"
+msgstr "Επίπεδο φωτεινότητας 2"

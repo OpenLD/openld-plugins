@@ -177,15 +177,12 @@ def main(session, **kwargs):
 	session.open(TempFanControl)
 
 def startMenu(menuid):
-	if getImageDistro() in ('openatv'):
-		if menuid != "extended":
-			return []
-	elif getImageDistro() in ('openld'):
+	if getImageDistro() in ('openatv', 'openld'):
 		if menuid != "extended":
 			return []
 	elif getImageDistro() in ('openhdf'):
 		if menuid != "devices_menu":
-			return []
+			return [ ]
 	else:
 		if menuid != "system":
 			return []
