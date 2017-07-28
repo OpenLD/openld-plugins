@@ -32,6 +32,7 @@ from Components.Sources.StaticText import StaticText
 from Components.ActionMap import NumberActionMap, ActionMap
 from Components.config import config, ConfigSelection, getConfigListEntry, ConfigText, ConfigSubsection, ConfigYesNo, ConfigSelection
 from Components.MenuList import MenuList
+from Tools.Directories import fileExists
 
 import os
 
@@ -194,11 +195,11 @@ class BluetoothDevicesManager(Screen):
 	def initDevice(self):
 		print "[BluetoothManager] initDevice"
 		cmd = "hciconfig hci0 up"
-		if getBoxType() in ("spycat4k"):
+		if getBoxType() in ("spycat4k","spycat4kcombo"):
 			cmd = "hciattach ttyS1 qca | hciconfig hci0 up"
 		if getMachineBuild() in ("xc7346") or getBoxType() in ("spycat4kmini"):
 			cmd = "hciattach ttyS1 rtk_h5 | hciconfig hci0 up"
-		if getMachineBuild() in ("xc7362"):
+		if getMachineBuild() in ("xc7362") or getBoxType() in ("osnino"):
 			cmd = "hciattach ttyS2 rtk_h5 | hciconfig hci0 up"
 		self.taskManager.append(cmd, self.cbPrintAvailBTDev, self.cbRunNextTask)
 		cmd = "hcitool dev" ## check if hci0 is on the dev list, then make scan
@@ -215,7 +216,7 @@ class BluetoothDevicesManager(Screen):
 			
 	def keyGreen(self):
 		print "[BluetoothManager] keyGreen"  
-		if config.btdevicesmanager.autostart.getValue() or  brandoem == 'xcore':
+		if config.btdevicesmanager.autostart.getValue() or  brandoem in ("xcore","edision"):
 			self["ConnStatus"].setText(_("No connected to any device"))
 			self.initDevice()
 		else:
@@ -341,7 +342,7 @@ def main(session, **kwargs):
 	session.open(BluetoothDevicesManager)
 
 def autostart(reason, **kwargs):
-	if brandoem != 'xcore':
+	if brandoem not in ("xcore","edision"):
 		if reason == 0:
 			if config.btdevicesmanager.autostart.getValue():
 				print "[BluetoothManager] Autostart: Loading driver" ## We have it on a blacklist because We want to have faster system loading, so We load driver while we enable it.
@@ -351,10 +352,23 @@ def autostart(reason, **kwargs):
 				os.system("rmmod rtk_btusb")
 
 def Plugins(**kwargs):
-	l = []
-	l.append(PluginDescriptor(where = [PluginDescriptor.WHERE_AUTOSTART], fnc = autostart))
-	if getImageDistro() in ("miracleboxhd", "miraclebox"):
-		l.append(PluginDescriptor(name=_("Bluetooth Devices Manager"), icon="plugin.png", where=PluginDescriptor.WHERE_MENU, fnc=start_menu_main))
+	ShowPlugin = True
+	if getBoxType() in ("osnino"):
+		if fileExists("/proc/stb/info/subtype"):
+			file = open("/proc/stb/info/subtype")
+			version = file.read().strip().lower()
+			file.close()
+			if version in ('10'):
+				ShowPlugin = False
+
+	if ShowPlugin :
+		l = []
+		l.append(PluginDescriptor(where = [PluginDescriptor.WHERE_AUTOSTART], fnc = autostart))
+		if getImageDistro() in ("miracleboxhd", "miraclebox"):
+			l.append(PluginDescriptor(name=_("Bluetooth Devices Manager"), icon="plugin.png", where=PluginDescriptor.WHERE_MENU, fnc=start_menu_main))
+		else:
+			l.append(PluginDescriptor(name=_("Bluetooth Devices Manager"), description = _("This is bt devices manager"), icon="plugin.png", where = PluginDescriptor.WHERE_PLUGINMENU, fnc=main))
+		return l
 	else:
-		l.append(PluginDescriptor(name=_("Bluetooth Devices Manager"), description = _("This is bt devices manager"), icon="plugin.png", where = PluginDescriptor.WHERE_PLUGINMENU, fnc=main))
-	return l  
+		return []
+
