@@ -91,6 +91,7 @@ AM_CONDITIONAL(ET9X00, test "$BOXTYPE" == "et9x00")
 AM_CONDITIONAL(ET8000, test "$BOXTYPE" == "et8000")
 AM_CONDITIONAL(ET10000, test "$BOXTYPE" == "et10000")
 AM_CONDITIONAL(ET1x000, test "$BOXTYPE" == "et1x000")
+AM_CONDITIONAL(ET13000, test "$BOXTYPE" == "et13000")
 AM_CONDITIONAL(VG2000, test `echo "$BOXTYPE"` == "vg2000")
 AM_CONDITIONAL(VG5000, test `echo "$BOXTYPE"` == "vg5000")
 AM_CONDITIONAL(JJ7362, test `echo "$BOXTYPE"` == "jj7362")
@@ -163,6 +164,7 @@ AM_CONDITIONAL(S7220S, test `echo "$BOXTYPE"` == "7220s")
 AM_CONDITIONAL(S7225S, test `echo "$BOXTYPE"` == "7225s")
 AM_CONDITIONAL(S7300S, test `echo "$BOXTYPE"` == "7300s")
 AM_CONDITIONAL(S7400S, test `echo "$BOXTYPE"` == "7400s")
+AM_CONDITIONAL(SF5008, test `echo "$BOXTYPE"` == "sf5008")
 AM_CONDITIONAL(SH1, test `echo "$BOXTYPE"` == "sh1")
 AM_CONDITIONAL(H3, test `echo "$BOXTYPE"` == "h3")
 AM_CONDITIONAL(H5, test `echo "$BOXTYPE"` == "h5")
@@ -170,6 +172,7 @@ AM_CONDITIONAL(H7, test `echo "$BOXTYPE"` == "h7")
 AM_CONDITIONAL(LC, test `echo "$BOXTYPE"` == "lc")
 AM_CONDITIONAL(TRIPLEX, test `echo "$BOXTYPE"` == "triplex")
 AM_CONDITIONAL(TIVIARMIN, test "$BOXTYPE" == tiviarmin)
+AM_CONDITIONAL(TIVIARAPLUS, test "$BOXTYPE" == tiviaraplus)
 AM_CONDITIONAL(SPARK, test `echo "$BOXTYPE" | cut -b 1-5` == spark)
 AM_CONDITIONAL(VS1000, test "$BOXTYPE" == "vs1000")
 AM_CONDITIONAL(XC7362, test "$BOXTYPE" == xc7362)
@@ -240,6 +243,7 @@ DsayersCustomMixImporter/Makefile
 DsayersCustomMixImporter/meta/Makefile
 DsayersCustomMixImporter/po/Makefile
 DsayersCustomMixImporter/src/Makefile
+DsayersCustomMixImporter/mixes/Makefile
 
 FirmwareUpgrade/Makefile
 FirmwareUpgrade/src/Makefile

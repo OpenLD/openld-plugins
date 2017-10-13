@@ -34,6 +34,14 @@ if ET10000
 SUBDIRS += MultiTransCodingSetup
 endif
 
+if ET13000
+SUBDIRS += MultiTransCodingSetup
+endif
+
+if SF5008
+SUBDIRS += MultiTransCodingSetup
+endif
+
 if G100
 SUBDIRS += F3LEDControl
 endif
@@ -123,6 +131,10 @@ SUBDIRS += VentonFancontrol MICOMUpgrade
 endif
 
 if INIHDP
+SUBDIRS += MultiTransCodingSetup
+endif
+
+if TIVIARAPLUS
 SUBDIRS += MultiTransCodingSetup
 endif
 
