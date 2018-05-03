@@ -297,7 +297,7 @@ class Blindscan(ConfigListScreen, Screen):
 		self.scan_sat = ConfigSubsection()
 		self.scan_networkScan = ConfigYesNo(default = False)
 
-		self.blindscan_Ku_band_start_frequency = ConfigInteger(default = 10700, limits = (10700, 12749))
+		self.blindscan_Ku_band_start_frequency = ConfigInteger(default = 9700, limits = (9700, 12749))
 		self.blindscan_Ku_band_stop_frequency = ConfigInteger(default = 12750, limits = (10701, 12750))
 		self.blindscan_circular_band_start_frequency = ConfigInteger(default = 11700, limits = (11700, 12749))
 		self.blindscan_circular_band_stop_frequency = ConfigInteger(default = 12750, limits = (11701, 12750))
@@ -413,7 +413,7 @@ class Blindscan(ConfigListScreen, Screen):
 				self.list.append(getConfigListEntry(_('Scan start frequency'), self.blindscan_circular_band_start_frequency,_('Frequency values must be between 117000 MHz and 12749 MHz (Circular-band)')))
 				self.list.append(getConfigListEntry(_('Scan stop frequency'), self.blindscan_circular_band_stop_frequency,_('Frequency values must be between 11701 MHz and 12750 MHz (Circular-band)')))
 			elif (self.is_Ku_band_scan or self.is_user_defined_scan) or (not self.is_c_band_scan and not self.is_circular_band_scan):
-				self.list.append(getConfigListEntry(_('Scan start frequency'), self.blindscan_Ku_band_start_frequency,_('Frequency values must be between 10700 MHz and 12749 MHz')))
+				self.list.append(getConfigListEntry(_('Scan start frequency'), self.blindscan_Ku_band_start_frequency,_('Frequency values must be between 9700 MHz and 12749 MHz')))
 				self.list.append(getConfigListEntry(_('Scan stop frequency'), self.blindscan_Ku_band_stop_frequency,_('Frequency values must be between 10701 MHz and 12750 MHz')))
 			if nim.description == 'TBS-5925':
 				self.list.append(getConfigListEntry(_("Scan Step in MHz(TBS5925)"), self.blindscan_step_mhz_tbs5925,_('Smaller steps takes longer but scan is more thorough')))
@@ -789,7 +789,7 @@ class Blindscan(ConfigListScreen, Screen):
 				else:
 					add_tp = False
 			else:
-				if freq < 12751 and freq > 10700:
+				if freq < 12751 and freq > 9700:
 					add_tp = True
 				else:
 					add_tp = False
@@ -877,6 +877,24 @@ class Blindscan(ConfigListScreen, Screen):
 						"FEC_8_9" : parm.FEC_8_9,
 						"FEC_3_5" : parm.FEC_3_5,
 						"FEC_9_10" : parm.FEC_9_10,
+						"FEC_13_45" : parm.FEC_Auto,
+						"FEC_9_20" : parm.FEC_Auto,
+						"FEC_11_20" : parm.FEC_Auto,
+						"FEC_23_36" : parm.FEC_Auto,
+						"FEC_25_36" : parm.FEC_Auto,
+						"FEC_13_18" : parm.FEC_Auto,
+						"FEC_26_45" : parm.FEC_Auto,
+						"FEC_28_45" : parm.FEC_Auto,
+						"FEC_7_9" : parm.FEC_Auto,
+						"FEC_77_90" : parm.FEC_Auto,
+						"FEC_32_45" : parm.FEC_Auto,
+						"FEC_11_15" : parm.FEC_Auto,
+						"FEC_1_2_L" : parm.FEC_Auto,
+						"FEC_8_15_L" : parm.FEC_Auto,
+						"FEC_3_5_L" : parm.FEC_Auto,
+						"FEC_2_3_L" : parm.FEC_Auto,
+						"FEC_5_9_L" : parm.FEC_Auto,
+						"FEC_26_45_L" : parm.FEC_Auto,
 						"FEC_NONE" : parm.FEC_None}
 					roll ={ "ROLLOFF_20" : parm.RollOff_alpha_0_20,
 						"ROLLOFF_25" : parm.RollOff_alpha_0_25,
@@ -1311,7 +1329,11 @@ def BlindscanCallback(close, answer):
 		close(True)
 
 def BlindscanMain(session, close=None, **kwargs):
-	session.openWithCallback(boundFunction(BlindscanCallback, close), Blindscan)
+	if 'Supports_Blind_Scan: yes' in open('/proc/bus/nim_sockets').read():
+		import dmmBlindScan
+		session.openWithCallback(boundFunction(BlindscanCallback, close), dmmBlindScan.DmmBlindscan)
+	else:
+		session.openWithCallback(boundFunction(BlindscanCallback, close), Blindscan)
 
 def BlindscanSetup(menuid, **kwargs):
 	if menuid == "scan":
