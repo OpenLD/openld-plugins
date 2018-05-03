@@ -1,6 +1,6 @@
 ACLOCAL_AMFLAGS = -I m4
 
-SUBDIRS = Blindscan DLNABrowser DLNAServer StreamTV 3GModemManager TunerServer OnDemand Fempa LCD4linux RemoteChannelStreamConverter BTDevicesManager SatipClient TerrestrialScan ChannelsImporter DsayersCustomMixImporter
+SUBDIRS = Blindscan DLNABrowser DLNAServer StreamTV 3GModemManager TunerServer OnDemand Fempa LCD4linux RemoteChannelStreamConverter BTDevicesManager SatipClient TerrestrialScan ChannelsImporter DsayersCustomMixImporter xmlUpdate
 
 if MIPSEL
 SUBDIRS += WirelessAccessPoint
@@ -208,6 +208,10 @@ endif
 
 if H7
 SUBDIRS += F3LEDControl
+endif
+
+if H9
+SUBDIRS += MultiTransCodingSetup
 endif
 
 if LC
