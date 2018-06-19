@@ -299,11 +299,7 @@ if VUPLUS
 SUBDIRS += HbbTV AudioEffect
 endif
 
-if WETEK
-SUBDIRS += RCUSelect ReZap
-endif
-
-if HARDKERNEL
+if HAVE_AMLPLUGINS
 SUBDIRS += RCUSelect ReZap
 endif
 
