@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-07 14:20+0200\n"
+"POT-Creation-Date: 2018-07-30 19:14+0200\n"
 "PO-Revision-Date: 2016-05-07 14:20+0200\n"
 "Last-Translator: JR (openspateam@gmail.com)\n"
 "Language-Team: \n"
@@ -15,63 +15,49 @@ msgstr ""
 "X-Poedit-SourceCharset: iso-8859-1\n"
 "X-Generator: Poedit 1.8.7\n"
 
-#: ../src/plugin.py:57 ../src/plugin.py:152 ../src/plugin.py:159
-msgid "Remote Control Code"
-msgstr "Codi Control Comandament"
-
-#
-#: ../src/plugin.py:68
-msgid "Cancel"
-msgstr "Cancel·lar"
-
-#
-#: ../src/plugin.py:69
-msgid "Save"
-msgstr "Guardar"
-
-#: ../src/plugin.py:80
-#, python-format
-msgid "Sorry, but %s is not supported."
-msgstr "Perdó, però %s no està suportat"
-
-#: ../src/plugin.py:84
-msgid "Remote Control System Code"
-msgstr "Codi Sistema Control del comandament"
-
-#: ../src/plugin.py:87
-msgid "Text support"
-msgstr "Suport text"
-
-#: ../src/plugin.py:99
-msgid "FILE NOT EXIST : /proc/stb/fp/remote_code"
-msgstr "ARXIU NO EXISTEIX : /proc/stb/fp/remote_code"
-
-#: ../src/plugin.py:101
-msgid "Please change your remote mode"
-msgstr "Si us plau, canvia el mode del teu comandament"
-
-#: ../src/plugin.py:101
-msgid ""
-"Press and hold '2' & '7' until red LED is solid, then press 'Help', then "
-"press '000"
-msgstr ""
-"Prem i mantingues premut '2' i '7' fins que el LED vermell estigui fixe, llavors prem 'Ajuda', llavors "
-"prem '000'"
-
-#: ../src/plugin.py:101
-msgid "Then choose 'Keep' within seconds"
-msgstr "Llavors tria 'Mantenir' durant segons"
-
-#: ../src/plugin.py:122
-msgid "Keep"
-msgstr "Mantenir"
-
-#
-#: ../src/plugin.py:122
-msgid "Restore"
-msgstr "Restaurar"
-
-#: ../src/plugin.py:128
 #, python-format
 msgid " in %d seconds."
 msgstr " en %d segons."
+
+msgid "Cancel"
+msgstr "Cancel·lar"
+
+msgid "FILE NOT EXIST : /proc/stb/fp/remote_code"
+msgstr "L'arxiu /proc/stb/fp/remote_code no existeix"
+
+msgid "Keep"
+msgstr "OK"
+
+msgid "Please change your remote mode"
+msgstr "Per a canviar el mode del comandament"
+
+msgid "Press and hold '2' & '7' until red LED is solid, then press 'Help', then press '000"
+msgstr "Prem i deixa premuts '2' y '7' fins que el led roig es quedi fixe, llavors prem 'Help' i després prem '000"
+
+msgid "Press and hold <OK> and <STB> until red LED is solid, then press '0000"
+msgstr "Prem y i deixa premuts <OK> i <STB> fins que el LED roig es quedi fixe, llavors prem '0000"
+
+msgid "Remote Control Code"
+msgstr "Codi comandament"
+
+msgid "Remote Control System Code"
+msgstr "Sistema del comandament"
+
+msgid "Remote Control Type"
+msgstr "Tipus comandament"
+
+msgid "Restore"
+msgstr "Restaurar"
+
+msgid "Save"
+msgstr "Guardar"
+
+#, python-format
+msgid "Sorry, but %s is not supported."
+msgstr "Ho sentim, però %s no està suportat."
+
+msgid "Text support"
+msgstr "Text de suport"
+
+msgid "Then choose 'Keep' within seconds"
+msgstr "A continuació premi 'OK'"

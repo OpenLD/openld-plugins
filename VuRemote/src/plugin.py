@@ -11,6 +11,13 @@ from Tools.Directories import fileExists
 from enigma import eTimer
 from boxbranding import getImageDistro, getBoxType
 
+def getRcuDefaultType():
+	if getBoxType() in ["vuultimo4k"]:
+		return "type5"
+	elif getBoxType() in ["vuuno4kse","vuzero4k","vuduo4k"]:
+		return "type6"
+	return "legacy"
+
 config.misc.remotecontrol_text_support = ConfigYesNo(default = True)
 
 config.plugins.remotecontrolcode = ConfigSubsection()
@@ -20,6 +27,8 @@ if getBoxType() in ("vusolo", "vuduo"):
 else:
 	config.plugins.remotecontrolcode.systemcode = ConfigSelection(default = "2", choices =
 		[ ("1", "1 "), ("2", "2 "), ("3", "3 "), ("4", "4 ") ] )
+config.plugins.remotecontrolcode.rcuType = ConfigSelection(default = getRcuDefaultType(), choices = 
+	[ ("legacy", "Legacy Vu+ Universal RCU"), ("type5", "New Vu+ Bluetooth RCU"), ("type6", "New Vu+ Type 6 RCU") ] )
 
 class RemoteControlCodeInit:
 	def __init__(self):
@@ -35,7 +44,7 @@ class RemoteControlCodeInit:
 		return 0
 
 	def getModel(self):
-		if getBoxType() in ("vuuno", "vuultimo", "vusolo2" ,"vuduo2", "vusolose", "vuzero", "vusolo4k", "vuuno4k", "vuultimo4k"):
+		if getBoxType() in ("vuuno", "vuultimo", "vusolo2" ,"vuduo2", "vusolose", "vuzero", "vusolo4k", "vuuno4k", "vuuno4kse", "vuzero4k", "vuultimo4k", "vuduo4k"):
 			return True
 		else:
 			return False
@@ -81,7 +90,9 @@ class RemoteControlCode(Screen,ConfigListScreen,RemoteControlCodeInit):
 
 	def createSetup(self):
 		self.list = []
+		self.rcuTypeEntry = getConfigListEntry(_("Remote Control Type"), config.plugins.remotecontrolcode.rcuType)
 		self.rcsctype = getConfigListEntry(_("Remote Control System Code"), config.plugins.remotecontrolcode.systemcode)
+		self.list.append( self.rcuTypeEntry )
 		self.list.append( self.rcsctype )
 		if getImageDistro() in ("openvix", "openatv"):
 			self.list.append(getConfigListEntry(_("Text support"), config.misc.remotecontrol_text_support))
@@ -98,7 +109,10 @@ class RemoteControlCode(Screen,ConfigListScreen,RemoteControlCodeInit):
 				self.restoreCode()
 				self.session.openWithCallback(self.close, MessageBox, _("FILE NOT EXIST : /proc/stb/fp/remote_code"), MessageBox.TYPE_ERROR)
 			else:
-				self.session.openWithCallback(self.MessageBoxConfirmCodeCallback, MessageBoxConfirmCode, _("Please change your remote mode") + '\n' + _("Press and hold '2' & '7' until red LED is solid, then press 'Help', then press '000") + config.plugins.remotecontrolcode.systemcode.value + "'\n" + _("Then choose 'Keep' within seconds"), MessageBox.TYPE_YESNO, timeout = 60, default = False)
+				if config.plugins.remotecontrolcode.rcuType.value == "legacy":
+					self.session.openWithCallback(self.MessageBoxConfirmCodeCallback, MessageBoxConfirmCode, _("Please change your remote mode") + '\n' + _("Press and hold '2' & '7' until red LED is solid, then press 'Help', then press '000") + config.plugins.remotecontrolcode.systemcode.value + "'\n" + _("Then choose 'Keep' within seconds"), MessageBox.TYPE_YESNO, timeout = 60, default = False)
+				else:
+					self.session.openWithCallback(self.MessageBoxConfirmCodeCallback, MessageBoxConfirmCode, _("Please change your remote mode") + '\n' + _("Press and hold <OK> and <STB> until red LED is solid, then press '0000") + config.plugins.remotecontrolcode.systemcode.value + "', then press <OK>\n" + _("Then choose 'Keep' within seconds"), MessageBox.TYPE_YESNO, timeout = 60, default = False)
 		else:
 			self.close()
 
