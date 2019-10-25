@@ -29,10 +29,11 @@ from time import strftime, time
 XML_BLINDSCAN_DIR = "/tmp"
 
 # _supportNimType is only used by vuplus hardware
-_supportNimType = { 'AVL1208':'', 'AVL6222':'6222_', 'AVL6211':'6211_', 'BCM7356':'bcm7346_'}
+_supportNimType = { 'AVL1208':'', 'AVL6222':'6222_', 'AVL6211':'6211_', 'BCM7356':'bcm7346_', 'SI2166':'si2166_'}
 
 # For STBs that support multiple DVB-S tuner models, e.g. Solo 4K.
-_unsupportedNims = ( 'Vuplus DVB-S NIM(7376 FBC)', ) # format = nim.description from nimmanager
+_unsupportedNims = ( 'Vuplus DVB-S NIM(7376 FBC)', 'Vuplus DVB-S NIM(45308X FBC)', 'DVB-S2 NIM(45308 FBC)') # format = nim.description from nimmanager
+
 
 # blindscan-s2 supported tuners
 _blindscans2Nims = ('TBS-5925', 'DVBS2BOX', 'M88DS3103')
@@ -1259,7 +1260,14 @@ class Blindscan(ConfigListScreen, Screen):
 		else:
 			nimconfig = nim.config
 		if nimconfig.configMode.getValue() == "advanced":
-			currSat = nimconfig.advanced.sat[cur_orb_pos]
+			if nimconfig.advanced.sats.value in ("3605", "3606"):
+				currSat = nimconfig.advanced.sat[int(nimconfig.advanced.sats.value)]
+				import ast
+				userSatellitesList = ast.literal_eval(currSat.userSatellitesList.getValue())
+				if not cur_orb_pos in userSatellitesList:
+					currSat = nimconfig.advanced.sat[cur_orb_pos]
+			else: 
+				currSat = nimconfig.advanced.sat[cur_orb_pos]
 			lnbnum = int(currSat.lnb.getValue())
 			currLnb = nimconfig.advanced.lnb[lnbnum]
 			if isinstance(currLnb, ConfigNothing):
@@ -1329,7 +1337,13 @@ def BlindscanCallback(close, answer):
 		close(True)
 
 def BlindscanMain(session, close=None, **kwargs):
-	if 'Supports_Blind_Scan: yes' in open('/proc/bus/nim_sockets').read():
+	have_Support_Blindscan = False
+	try:
+		if 'Supports_Blind_Scan: yes' in open('/proc/bus/nim_sockets').read():
+			have_Support_Blindscan = True
+	except:
+		pass
+	if have_Support_Blindscan:
 		import dmmBlindScan
 		session.openWithCallback(boundFunction(BlindscanCallback, close), dmmBlindScan.DmmBlindscan)
 	else:
